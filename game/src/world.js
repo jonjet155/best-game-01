@@ -130,7 +130,7 @@ export function chooseUpgrade(world, index, audio) {
   const up = world.upgradeOptions[index];
   if (!up || world.screen !== SCREEN_UPGRADE) return;
   up.apply(world.upgrades);
-  world.owned.push(up.name);
+  world.owned.push(up.id);
   if (world.upgrades.healNow > 0) {
     world.keeper.maxHp = KEEPER_MAX_HP + world.upgrades.maxHpBonus;
     world.keeper.hp = Math.min(world.keeper.maxHp, world.keeper.hp + world.upgrades.healNow);
