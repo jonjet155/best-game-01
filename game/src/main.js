@@ -47,6 +47,9 @@ function saveBest(value) {
 }
 
 world.best = readBest();
+// Debug handle for play-testing (read-only from the outside in practice):
+// lets a test script watch the simulation without touching game logic.
+window.__emberkeep = world;
 
 function runShot(name) {
   const scene = stageShot(name, world);
