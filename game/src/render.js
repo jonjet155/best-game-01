@@ -168,6 +168,14 @@ export function createRenderer(canvas) {
 
   function drawEnemy(e, t) {
     const wob = Math.sin(e.wobble * 3) * 2;
+    // Shadow aura: a faint purple glow so the creature reads at small size.
+    const aura = ctx.createRadialGradient(e.x, e.y, 2, e.x, e.y, e.radius * 2.1);
+    aura.addColorStop(0, 'rgba(168,85,247,0.28)');
+    aura.addColorStop(1, 'rgba(168,85,247,0)');
+    ctx.fillStyle = aura;
+    ctx.beginPath();
+    ctx.arc(e.x, e.y, e.radius * 2.1, 0, Math.PI * 2);
+    ctx.fill();
     // Shadow body: a dark blob with glowing eyes — readable at any size.
     ctx.fillStyle = e.hitFlash > 0 ? '#e9d5ff' : '#1e1b2e';
     ctx.beginPath();
@@ -423,7 +431,7 @@ export function createRenderer(canvas) {
     drawBraziers(world, world.time);
     for (const e of world.enemies) drawEnemy(e, world.time);
     drawDarkness(world);
-    ctx.fillStyle = 'rgba(2,4,14,0.62)';
+    ctx.fillStyle = 'rgba(2,4,14,0.45)';
     ctx.fillRect(0, 0, VIEW_W, VIEW_H);
     if (won) {
       text('DAWN BREAKS — YOU WIN!', VIEW_W / 2, 130, 46, '#fbbf24', 'center');
